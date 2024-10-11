@@ -9,7 +9,6 @@ import com.example.photo.gallery.ui.AppState
 @Composable
 fun AppNavHost(
   appState: AppState,
-  onShowSnackBar: suspend (String, String?) -> Boolean,
   modifier: Modifier = Modifier,
 ) {
   val navController = appState.navController

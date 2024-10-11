@@ -23,7 +23,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
 
 @Composable
-fun RowScope.NavigationBarItem(
+fun RowScope.AppNavigationBarItem(
   selected: Boolean,
   onClick: () -> Unit,
   modifier: Modifier = Modifier,
@@ -42,30 +42,30 @@ fun RowScope.NavigationBarItem(
     label = label,
     alwaysShowLabel = alwaysShowLabel,
     colors = NavigationBarItemDefaults.colors(
-      selectedIconColor = NavigationDefaults.navigationSelectedItemColor(),
-      unselectedIconColor = NavigationDefaults.navigationContentColor(),
-      selectedTextColor = NavigationDefaults.navigationSelectedItemColor(),
-      unselectedTextColor = NavigationDefaults.navigationContentColor(),
-      indicatorColor = NavigationDefaults.navigationIndicatorColor(),
+      selectedIconColor = AppNavigationDefaults.navigationSelectedItemColor(),
+      unselectedIconColor = AppNavigationDefaults.navigationContentColor(),
+      selectedTextColor = AppNavigationDefaults.navigationSelectedItemColor(),
+      unselectedTextColor = AppNavigationDefaults.navigationContentColor(),
+      indicatorColor = AppNavigationDefaults.navigationIndicatorColor(),
     ),
   )
 }
 
 @Composable
-fun NavigationBar(
+fun AppNavigationBar(
   modifier: Modifier = Modifier,
   content: @Composable RowScope.() -> Unit,
 ) {
   NavigationBar(
     modifier = modifier,
-    contentColor = NavigationDefaults.navigationContentColor(),
+    contentColor = AppNavigationDefaults.navigationContentColor(),
     tonalElevation = 0.dp,
     content = content,
   )
 }
 
 @Composable
-fun NavigationRailItem(
+fun AppNavigationRailItem(
   selected: Boolean,
   onClick: () -> Unit,
   modifier: Modifier = Modifier,
@@ -84,17 +84,17 @@ fun NavigationRailItem(
     label = label,
     alwaysShowLabel = alwaysShowLabel,
     colors = NavigationRailItemDefaults.colors(
-      selectedIconColor = NavigationDefaults.navigationSelectedItemColor(),
-      unselectedIconColor = NavigationDefaults.navigationContentColor(),
-      selectedTextColor = NavigationDefaults.navigationSelectedItemColor(),
-      unselectedTextColor = NavigationDefaults.navigationContentColor(),
-      indicatorColor = NavigationDefaults.navigationIndicatorColor(),
+      selectedIconColor = AppNavigationDefaults.navigationSelectedItemColor(),
+      unselectedIconColor = AppNavigationDefaults.navigationContentColor(),
+      selectedTextColor = AppNavigationDefaults.navigationSelectedItemColor(),
+      unselectedTextColor = AppNavigationDefaults.navigationContentColor(),
+      indicatorColor = AppNavigationDefaults.navigationIndicatorColor(),
     ),
   )
 }
 
 @Composable
-fun NavigationRail(
+fun AppNavigationRail(
   modifier: Modifier = Modifier,
   header: @Composable (ColumnScope.() -> Unit)? = null,
   content: @Composable ColumnScope.() -> Unit,
@@ -102,15 +102,15 @@ fun NavigationRail(
   NavigationRail(
     modifier = modifier,
     containerColor = Color.Transparent,
-    contentColor = NavigationDefaults.navigationContentColor(),
+    contentColor = AppNavigationDefaults.navigationContentColor(),
     header = header,
     content = content,
   )
 }
 
 @Composable
-fun NavigationSuiteScaffold(
-  navigationSuiteItems: com.example.photo.gallery.ui.NavigationSuiteScope.() -> Unit,
+fun AppNavigationSuiteScaffold(
+  navigationSuiteItems: AppNavigationSuiteScope.() -> Unit,
   modifier: Modifier = Modifier,
   windowAdaptiveInfo: WindowAdaptiveInfo = currentWindowAdaptiveInfo(),
   content: @Composable () -> Unit,
@@ -119,30 +119,30 @@ fun NavigationSuiteScaffold(
     .calculateFromAdaptiveInfo(windowAdaptiveInfo)
   val navigationSuiteItemColors = NavigationSuiteItemColors(
     navigationBarItemColors = NavigationBarItemDefaults.colors(
-      selectedIconColor = NavigationDefaults.navigationSelectedItemColor(),
-      unselectedIconColor = NavigationDefaults.navigationContentColor(),
-      selectedTextColor = NavigationDefaults.navigationSelectedItemColor(),
-      unselectedTextColor = NavigationDefaults.navigationContentColor(),
-      indicatorColor = NavigationDefaults.navigationIndicatorColor(),
+      selectedIconColor = AppNavigationDefaults.navigationSelectedItemColor(),
+      unselectedIconColor = AppNavigationDefaults.navigationContentColor(),
+      selectedTextColor = AppNavigationDefaults.navigationSelectedItemColor(),
+      unselectedTextColor = AppNavigationDefaults.navigationContentColor(),
+      indicatorColor = AppNavigationDefaults.navigationIndicatorColor(),
     ),
     navigationRailItemColors = NavigationRailItemDefaults.colors(
-      selectedIconColor = NavigationDefaults.navigationSelectedItemColor(),
-      unselectedIconColor = NavigationDefaults.navigationContentColor(),
-      selectedTextColor = NavigationDefaults.navigationSelectedItemColor(),
-      unselectedTextColor = NavigationDefaults.navigationContentColor(),
-      indicatorColor = NavigationDefaults.navigationIndicatorColor(),
+      selectedIconColor = AppNavigationDefaults.navigationSelectedItemColor(),
+      unselectedIconColor = AppNavigationDefaults.navigationContentColor(),
+      selectedTextColor = AppNavigationDefaults.navigationSelectedItemColor(),
+      unselectedTextColor = AppNavigationDefaults.navigationContentColor(),
+      indicatorColor = AppNavigationDefaults.navigationIndicatorColor(),
     ),
     navigationDrawerItemColors = NavigationDrawerItemDefaults.colors(
-      selectedIconColor = NavigationDefaults.navigationSelectedItemColor(),
-      unselectedIconColor = NavigationDefaults.navigationContentColor(),
-      selectedTextColor = NavigationDefaults.navigationSelectedItemColor(),
-      unselectedTextColor = NavigationDefaults.navigationContentColor(),
+      selectedIconColor = AppNavigationDefaults.navigationSelectedItemColor(),
+      unselectedIconColor = AppNavigationDefaults.navigationContentColor(),
+      selectedTextColor = AppNavigationDefaults.navigationSelectedItemColor(),
+      unselectedTextColor = AppNavigationDefaults.navigationContentColor(),
     ),
   )
 
   NavigationSuiteScaffold(
     navigationSuiteItems = {
-      NavigationSuiteScope(
+      AppNavigationSuiteScope(
         navigationSuiteScope = this,
         navigationSuiteItemColors = navigationSuiteItemColors,
       ).run(navigationSuiteItems)
@@ -150,7 +150,7 @@ fun NavigationSuiteScaffold(
     layoutType = layoutType,
     containerColor = Color.Transparent,
     navigationSuiteColors = NavigationSuiteDefaults.colors(
-      navigationBarContentColor = NavigationDefaults.navigationContentColor(),
+      navigationBarContentColor = AppNavigationDefaults.navigationContentColor(),
       navigationRailContainerColor = Color.Transparent,
     ),
     modifier = modifier,
@@ -159,7 +159,7 @@ fun NavigationSuiteScaffold(
   }
 }
 
-class NavigationSuiteScope internal constructor(
+class AppNavigationSuiteScope internal constructor(
   private val navigationSuiteScope: NavigationSuiteScope,
   private val navigationSuiteItemColors: NavigationSuiteItemColors,
 ) {
@@ -186,7 +186,7 @@ class NavigationSuiteScope internal constructor(
   )
 }
 
-object NavigationDefaults {
+object AppNavigationDefaults {
   @Composable
   fun navigationContentColor() = MaterialTheme.colorScheme.onSurfaceVariant
 

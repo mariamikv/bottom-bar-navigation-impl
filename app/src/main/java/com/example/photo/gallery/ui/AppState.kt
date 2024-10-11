@@ -13,77 +13,61 @@ import androidx.navigation.compose.rememberNavController
 import androidx.navigation.navOptions
 import com.example.photo.gallery.features.camera.navigateToCamera
 import com.example.photo.gallery.features.gallery.navigateToGallery
+import com.example.photo.gallery.features.me.navigateToMe
 import com.example.photo.gallery.navigation.TopLevelDestination
 import kotlinx.coroutines.CoroutineScope
 
 @Composable
 fun rememberAppState(
-  coroutineScope: CoroutineScope = rememberCoroutineScope(),
-  navController: NavHostController = rememberNavController(),
+    coroutineScope: CoroutineScope = rememberCoroutineScope(),
+    navController: NavHostController = rememberNavController(),
 ): AppState {
-  return remember(
-    navController,
-    coroutineScope,
-  ) {
-    AppState(
-      navController = navController,
-      coroutineScope = coroutineScope,
-    )
-  }
+    return remember(
+        navController,
+        coroutineScope,
+    ) {
+        AppState(
+            navController = navController,
+            coroutineScope = coroutineScope,
+        )
+    }
 }
 
 @Stable
 class AppState(
-  val navController: NavHostController,
-  coroutineScope: CoroutineScope,
+    val navController: NavHostController,
+    coroutineScope: CoroutineScope,
 ) {
-  val currentDestination: NavDestination?
-    @Composable get() = navController
-      .currentBackStackEntryAsState().value?.destination
+    val currentDestination: NavDestination?
+        @Composable get() = navController
+            .currentBackStackEntryAsState().value?.destination
 
-  val currentTopLevelDestination: TopLevelDestination?
-    @Composable get() {
-      return TopLevelDestination.entries.firstOrNull { topLevelDestination ->
-        currentDestination?.hasRoute(
-          route = topLevelDestination.route.toString(), //TODO don't know if it works
-          arguments = null,
-        ) ?: false
-      }
-    }
-
-  /**
-   * Map of top level destinations to be used in the TopBar, BottomBar and NavRail. The key is the
-   * route.
-   */
-  val topLevelDestinations: List<TopLevelDestination> = TopLevelDestination.entries
-
-  /**
-   * UI logic for navigating to a top level destination in the app. Top level destinations have
-   * only one copy of the destination of the back stack, and save and restore state whenever you
-   * navigate to and from it.
-   *
-   * @param topLevelDestination: The destination the app needs to navigate to.
-   */
-  fun navigateToTopLevelDestination(topLevelDestination: TopLevelDestination) {
-    trace("Navigation: ${topLevelDestination.name}") {
-      val topLevelNavOptions = navOptions {
-        // Pop up to the start destination of the graph to
-        // avoid building up a large stack of destinations
-        // on the back stack as users select items
-        popUpTo(navController.graph.findStartDestination().id) {
-          saveState = true
+    val currentTopLevelDestination: TopLevelDestination?
+        @Composable get() {
+            return TopLevelDestination.entries.firstOrNull { topLevelDestination ->
+                currentDestination?.hasRoute(
+                    route = topLevelDestination.route.toString(), //TODO don't know if it works
+                    arguments = null,
+                ) ?: false
+            }
         }
-        // Avoid multiple copies of the same destination when
-        // reselecting the same item
-        launchSingleTop = true
-        // Restore state when reselecting a previously selected item
-        restoreState = true
-      }
+    val topLevelDestinations: List<TopLevelDestination> = TopLevelDestination.entries
 
-      when (topLevelDestination) {
-        TopLevelDestination.CAMERA -> navController.navigateToCamera(topLevelNavOptions)
-        TopLevelDestination.GALLERY -> navController.navigateToGallery(topLevelNavOptions)
-      }
+    fun navigateToTopLevelDestination(topLevelDestination: TopLevelDestination) {
+        trace("Navigation: ${topLevelDestination.name}") {
+            val topLevelNavOptions = navOptions {
+                popUpTo(navController.graph.findStartDestination().id) {
+                    saveState = true
+                }
+                launchSingleTop = true
+                restoreState = true
+            }
+
+            when (topLevelDestination) {
+                TopLevelDestination.CAMERA -> navController.navigateToCamera(topLevelNavOptions)
+                TopLevelDestination.GALLERY -> navController.navigateToGallery(topLevelNavOptions)
+                TopLevelDestination.ME -> navController.navigateToMe(topLevelNavOptions)
+            }
+        }
     }
-  }
 }

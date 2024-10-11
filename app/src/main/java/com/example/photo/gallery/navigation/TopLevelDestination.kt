@@ -26,4 +26,10 @@ enum class TopLevelDestination(
     titleTextId = R.string.gallery_screen,
     route = GalleryRoute::class,
   ),
+  ME(
+    icon = AppIcons.me,
+    iconTextId = R.string.gallery_screen,
+    titleTextId = R.string.gallery_screen,
+    route = GalleryRoute::class,
+  ),
 }
