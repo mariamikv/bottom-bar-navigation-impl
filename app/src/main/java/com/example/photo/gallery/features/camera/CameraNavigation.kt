@@ -10,16 +10,14 @@ import kotlinx.serialization.Serializable
 data object CameraRoute
 
 fun NavController.navigateToCamera(
-  navOptions: NavOptions,
+    navOptions: NavOptions,
 ) = navigate(
-  route = CameraRoute,
-  navOptions = navOptions,
+    route = CameraRoute,
+    navOptions = navOptions,
 )
 
-fun NavGraphBuilder.cameraScreen(
-  onTopicClick: (String) -> Unit,
-) {
-  composable<CameraRoute> {
-    // CameraScreen(onTopClick) callback
-  }
+fun NavGraphBuilder.cameraScreen() {
+    composable<CameraRoute> {
+        CameraScreen()
+    }
 }

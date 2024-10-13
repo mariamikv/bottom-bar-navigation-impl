@@ -10,16 +10,14 @@ import kotlinx.serialization.Serializable
 data object GalleryRoute
 
 fun NavController.navigateToGallery(
-  navOptions: NavOptions,
+    navOptions: NavOptions,
 ) = navigate(
-  route = GalleryRoute,
-  navOptions = navOptions,
+    route = GalleryRoute,
+    navOptions = navOptions,
 )
 
-fun NavGraphBuilder.galleryScreen(
-  onTopicClick: (String) -> Unit,
-) {
-  composable<GalleryRoute> {
-    // GalleryScreen(onTopicClick) on click callback
-  }
+fun NavGraphBuilder.galleryScreen() {
+    composable<GalleryRoute> {
+        GalleryScreen()
+    }
 }

@@ -13,7 +13,7 @@ import androidx.navigation.compose.rememberNavController
 import androidx.navigation.navOptions
 import com.example.photo.gallery.features.camera.navigateToCamera
 import com.example.photo.gallery.features.gallery.navigateToGallery
-import com.example.photo.gallery.features.me.navigateToMe
+import com.example.photo.gallery.features.profile.navigateToProfile
 import com.example.photo.gallery.navigation.TopLevelDestination
 import kotlinx.coroutines.CoroutineScope
 
@@ -66,7 +66,7 @@ class AppState(
             when (topLevelDestination) {
                 TopLevelDestination.CAMERA -> navController.navigateToCamera(topLevelNavOptions)
                 TopLevelDestination.GALLERY -> navController.navigateToGallery(topLevelNavOptions)
-                TopLevelDestination.ME -> navController.navigateToMe(topLevelNavOptions)
+                TopLevelDestination.ME -> navController.navigateToProfile(topLevelNavOptions)
             }
         }
     }

@@ -9,27 +9,20 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.only
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.safeDrawing
+import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.windowInsetsPadding
-import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
-import androidx.compose.material3.Text
-import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.runtime.Composable
-import androidx.compose.ui.ExperimentalComposeUiApi
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
-import androidx.compose.ui.res.stringResource
-import androidx.compose.ui.semantics.semantics
-import androidx.compose.ui.semantics.testTagsAsResourceId
+import androidx.compose.ui.unit.dp
 import androidx.navigation.NavDestination
 import androidx.navigation.NavDestination.Companion.hasRoute
 import androidx.navigation.NavDestination.Companion.hierarchy
-import com.example.photo.gallery.R
 import com.example.photo.gallery.navigation.AppNavHost
-import com.example.photo.gallery.ui.icon.AppIcons
 import kotlin.reflect.KClass
 
 @Composable
@@ -43,7 +36,6 @@ fun App(
     )
 }
 
-@OptIn(ExperimentalComposeUiApi::class, ExperimentalMaterial3Api::class)
 @Composable
 internal fun AppContent(
     appState: AppState,
@@ -68,18 +60,15 @@ internal fun AppContent(
                         Icon(
                             painter = painterResource(destination.icon),
                             contentDescription = null,
-                            tint = Color.LightGray,
+                            modifier = Modifier.size(40.dp)
                         )
                     },
-                    label = { Text(stringResource(destination.iconTextId)) },
                 )
             }
         },
     ) {
         Scaffold(
-            modifier = modifier.semantics {
-                testTagsAsResourceId = true
-            },
+            modifier = modifier,
             containerColor = Color.Transparent,
             contentColor = MaterialTheme.colorScheme.onBackground,
             contentWindowInsets = WindowInsets(0, 0, 0, 0),
@@ -95,37 +84,8 @@ internal fun AppContent(
                         ),
                     ),
             ) {
-                val destination = appState.currentTopLevelDestination
-                var shouldShowTopAppBar = false
-
-                if (destination != null) {
-                    shouldShowTopAppBar = true
-                    AppTopAppBar(
-                        titleRes = destination.titleTextId,
-                        navigationIcon = AppIcons.camera,
-                        navigationIconContentDescription = stringResource(
-                            id = R.string.camera_screen,
-                        ),
-                        actionIcon = AppIcons.gallery,
-                        actionIconContentDescription = stringResource(
-                            id = R.string.gallery_screen,
-                        ),
-                        colors = TopAppBarDefaults.centerAlignedTopAppBarColors(
-                            containerColor = Color.Transparent,
-                        ),
-                        onActionClick = { /*onTopAppBarActionClick()*/ },
-                        onNavigationClick = { /*appState.navigateToSearch()*/ },
-                    )
-                }
-
                 Box(
-                    modifier = Modifier.consumeWindowInsets(
-                        if (shouldShowTopAppBar) {
-                            WindowInsets.safeDrawing.only(WindowInsetsSides.Top)
-                        } else {
-                            WindowInsets(0, 0, 0, 0)
-                        },
-                    ),
+                    modifier = Modifier.consumeWindowInsets(WindowInsets(0, 0, 0, 0)),
                 ) {
                     AppNavHost(
                         appState = appState,

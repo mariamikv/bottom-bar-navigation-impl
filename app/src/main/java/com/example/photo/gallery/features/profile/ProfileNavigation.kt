@@ -1,4 +1,4 @@
-package com.example.photo.gallery.features.me
+package com.example.photo.gallery.features.profile
 
 import androidx.navigation.NavController
 import androidx.navigation.NavGraphBuilder
@@ -7,19 +7,17 @@ import androidx.navigation.compose.composable
 import kotlinx.serialization.Serializable
 
 @Serializable
-data object MeRoute
+data object ProfileRoute
 
-fun NavController.navigateToMe(
+fun NavController.navigateToProfile(
     navOptions: NavOptions,
 ) = navigate(
-    route = MeRoute,
+    route = ProfileRoute,
     navOptions = navOptions,
 )
 
-fun NavGraphBuilder.meScreen(
-    onTopicClick: (String) -> Unit,
-) {
-    composable<MeRoute> {
-        // GalleryScreen(onTopicClick) on click callback
+fun NavGraphBuilder.profileScreen() {
+    composable<ProfileRoute> {
+        ProfileScreen()
     }
 }
