@@ -11,9 +11,7 @@ import androidx.compose.runtime.DisposableEffect
 import com.example.photo.gallery.ui.App
 import com.example.photo.gallery.ui.rememberAppState
 import com.example.photo.gallery.ui.theme.PhotoGalleryTheme
-import dagger.hilt.android.AndroidEntryPoint
 
-@AndroidEntryPoint
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
